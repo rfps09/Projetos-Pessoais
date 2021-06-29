@@ -207,12 +207,18 @@ function resultado() {
             resultado = auxiliar / numero;    
         }
 
-        num = resultado.toString();
-
-        tamanho(num);
-
-        document.getElementById("resultado").innerHTML = num;
-
+        if (op == "/" && numero == 0) {
+            num = "Não é possível dividir por zero";
+            tamanho(num);
+            document.getElementById("resultado").innerHTML = num;
+            num = "";
+        }
+        else {
+            num = resultado.toString();
+            tamanho(num);
+            document.getElementById("resultado").innerHTML = num;
+        }
+        
         aux = "";
         op = "";
 
