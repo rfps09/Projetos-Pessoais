@@ -130,15 +130,13 @@ function funcaoOP(y) {
     if (op == "" && num != "") {
         aux = num;
         op = y;
-        tamanho(aux);
-        document.getElementById("resultado").innerHTML = aux + op;
         num = "";
     }
     else if (op != "" || num != "") {
         op = y;
-        tamanho(aux);
-        document.getElementById("resultado").innerHTML = aux + op;
     }
+    tamanho(aux);
+    document.getElementById("resultado").innerHTML = aux + op;
     document.getElementById("resultado-teste").style.display = "none"
 }
 
