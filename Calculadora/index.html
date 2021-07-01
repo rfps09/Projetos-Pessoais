@@ -5,44 +5,51 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Calculadora</title>
+        <link rel="shortcut icon" href="img/cal.ico" type="image/x-icon" />
         <link rel="stylesheet" type="text/css" href="css/estilo.css">
     </head>
     <body>
         <div class="container">
             <div id="resultado-display">
-                <span id="resultado">0</span>
+                <div id="mrc-teste">M</div>
+                <span id="resultado">|</span>
                 <div id="resultado-teste">RESULTADO</div>
             </div>
             <div class="div-tabela">
                 <table class="tabela">
                     <tr>
-                        <td><button id="multiplicacao" onclick="funcaoOP('x')">x</button></td>
-                        <td><button id="divisao" onclick="funcaoOP('/')">/</button></td>
+                        <td><button id="mrc" onclick="mrcMemorie()">MRC</button></td>
+                        <td><button id="mMais" onclick="mMais()">M+</button></td>
+                        <td><button id="mMenos" onclick="mMenos()">M-</button></td>
+                        <td><button id="porcentagem" onclick="funcaoOP('%')">%</button></td>
                         <td><button id="soma" onclick="funcaoOP('+')">+</button></td>
+                    </tr>
+                    <tr>
+                        <td><button id="raiz" onclick="funcaoOP('raiz')">√</button></td>
+                        <td><button id="sete" onclick="numero(7)" class="numero">7</button></td>
+                        <td><button id="oito" onclick="numero(8)" class="numero">8</button></td>
+                        <td><button id="nove" onclick="numero(9)" class="numero">9</button></td>
                         <td><button id="subtracao" onclick="funcaoOP('-')">-</button></td>
                     </tr>
                     <tr>
-                        <td><button id="porcentagem" onclick="porcentagem()">%</button></td>
-                        <td><button id="sete" onclick="funcao(7)" class="numero">7</button></td>
-                        <td><button id="oito" onclick="funcao(8)" class="numero">8</button></td>
-                        <td><button id="nove" onclick="funcao(9)" class="numero">9</button></td>
-                    </tr>
-                    <tr>
-                        <td><button id="sinal" onclick="sinal()">+/-</button></td>
-                        <td><button id="quatro" onclick="funcao(4)" class="numero">4</button></td>
-                        <td><button id="cinco" onclick="funcao(5)" class="numero">5</button></td>
-                        <td><button id="seis" onclick="funcao(6)" class="numero">6</button></td>
+                        <td><button id="potencia" onclick="funcaoOP('^')">x<sup>y</sup></button></td>
+                        <td><button id="quatro" onclick="numero(4)" class="numero">4</button></td>
+                        <td><button id="cinco" onclick="numero(5)" class="numero">5</button></td>
+                        <td><button id="seis" onclick="numero(6)" class="numero">6</button></td>
+                        <td><button id="multiplicacao" onclick="funcaoOP('x')">x</button></td>
                     </tr>
                     <tr>
                         <td><button id="apagar" onclick="apagar()" class="c">CE</button></td>
-                        <td><button id="um" onclick="funcao(1)" class="numero">1</button></td>
-                        <td><button id="dois" onclick="funcao(2)" class="numero">2</button></td>
-                        <td><button id="tres" onclick="funcao(3)" class="numero">3</button></td>    
+                        <td><button id="um" onclick="numero(1)" class="numero">1</button></td>
+                        <td><button id="dois" onclick="numero(2)" class="numero">2</button></td>
+                        <td><button id="tres" onclick="numero(3)" class="numero">3</button></td>
+                        <td><button id="divisao" onclick="funcaoOP('/')">/</button></td>  
                     </tr>
                     <tr>
                         <td><button id="blackhole" onclick="blackhole()" class="c">C</button></td>
-                        <td><button id="zero" onclick="funcao(0)" class="numero">0</button></td>
-                        <td><button id="ponto" onclick="funcao('.')" class="numero">.</button></td>
+                        <td><button id="sinal" onclick="sinal()" class="numero">+/-</button></td>
+                        <td><button id="zero" onclick="numero(0)" class="numero">0</button></td>
+                        <td><button id="ponto" onclick="numero('.')" class="numero">.</button></td>
                         <td><button id="result" onclick="resultado()">=</button></td>
                     </tr>
                 </table>
