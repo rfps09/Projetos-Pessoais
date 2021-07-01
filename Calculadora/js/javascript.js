@@ -176,12 +176,14 @@ function resultado(o) {
             num = "";
             op = "";
             aux = "";
+            ce = false;
         }
         else if (typeof(o) != "undefined") {
             num = resultado.toString();
             tamanho(num, num + o);
             op = "";
             aux = "";
+            ce = true;
             funcaoOP(o);
         }
         else {
@@ -189,11 +191,11 @@ function resultado(o) {
             tamanho(num, num);
             op = "";
             aux = "";
+            ce = false;
         }
 
         document.getElementById("resultado-teste").style.display = "block"
         alt = false;
-        ce = false;
     }
 }
 
