@@ -48,6 +48,14 @@ function numero(x) {
         document.getElementById("resultado-teste").style.display = "none"
         alt = false;
     }
+    else if (x != "." && num.length < 15 && ce == false)  {
+        blackhole();
+        num = num + x.toString();
+        tamanho(num, num);
+        document.getElementById("resultado").style.animation = "none";
+        document.getElementById("resultado-teste").style.display = "none"
+        alt = false;
+    }
 }
 
 function funcaoOP(y) {
