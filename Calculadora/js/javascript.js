@@ -206,7 +206,7 @@ function mrcMemorie() {
         document.getElementById("resultado").style.animation = "none";
         document.getElementById("resultado-teste").style.display = "none"
         alt = true;
-        ce = true;
+        ce = false;
     }
     else if (mrc != "" && alt == true) {
         mrc = "";
@@ -215,6 +215,7 @@ function mrcMemorie() {
         num = "";
         document.getElementById("resultado-teste").style.display = "none"
         mrcTeste()
+        ce = true;
     }
 }
 
