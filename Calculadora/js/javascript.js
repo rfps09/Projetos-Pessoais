@@ -235,8 +235,8 @@ function mMais() {
 function mrcTeste() {
     if (mrc != "") {
         document.getElementById("mrc-teste").style.display = "block"
-        document.getElementById("resultado").style.lineHeight = "34px"
-        document.getElementById("resultado-teste").style.marginTop = "-5px"
+        document.getElementById("resultado").style.lineHeight = "25px"
+        document.getElementById("resultado-teste").style.marginTop = "-6px"
     }
     else {
         document.getElementById("mrc-teste").style.display = "none"
