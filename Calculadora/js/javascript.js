@@ -7,7 +7,7 @@ var ce = true;
 
 function tamanho(a,b) {
     if (a.length < 12) {
-        document.getElementById("resultado").style.fontSize = "70px";
+        document.getElementById("resultado").style.fontSize = "85px";
         document.getElementById("resultado").innerHTML = b;
     }
     else if (a.length > 11 && a.length < 16) {
