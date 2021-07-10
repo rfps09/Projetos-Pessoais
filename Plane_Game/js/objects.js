@@ -11,6 +11,8 @@ var Sprites = function(sourceX, sourceY, width, height,x,y) {
     this.timeExploded = 0;
     this.animex = 0;
     this.animey = 0;
+    this.bossLife = 0;
+    this.youwin = false;
 }
 
 Sprites.prototype.CenterX = function() {
@@ -42,7 +44,7 @@ Sprites.prototype.AnimeX =  function() {
 var MensagemLabel = function(texto,) {
     this.visible = false;
     this.content = texto;
-    this.font = "bold 30px Calibri";
+    this.font = "bold 30px Calibri-Download";
     this.color = "red";
     this.textAlign = "center";
 }
