@@ -195,7 +195,7 @@ function eixoX() {
         jogador.vx = 0;
     }
 
-    jogador.x = Math.min(cnv.width-jogador.width, Math.max(0,jogador.x += jogador.vx));
+    jogador.x = Math.min(cnv.width-boss.width-jogador.width, Math.max(0,jogador.x += jogador.vx));
 }
 
 function freefire() {
@@ -217,31 +217,54 @@ function spawnEnemy() {
 }
 
 function likeboss() {
+    var bossMovY = false;
     if (boss.x > cnv.width - 231.25) {
         boss.vx = -1.5;
+        boss.vy = 0;
     }
     else {
         boss.vx = 0;
+        bossMovY = true;
+    }
+
+    if (bossMovY === true && (boss.y >= cnv.height - 113.75 || boss.vy === 0)) {
+        boss.vy = -4;
+    }
+    else if (boss.y <= 0) {
+        boss.vy = 4;
     }
 
     boss.x += boss.vx;
+    boss.y = Math.min(cnv.height - 113.75, Math.max(0,boss.y + boss.vy));
 
-    if (bossShootTime > 120 && boss.vx === 0) {
+    if (bossShootTime > 30 && boss.vx === 0) {
         bossShootTime = 0;
-        for (let i = 0; i < 5; i++) {
-            var bossFire = new Sprites(0,0,52,28.25,boss.x, 79*i + 55);
-            if (i < 2) {
-                bossFire.vy = -2.5;
-            }
-            else if (i > 2) {
-                bossFire.vy = 2.5;
-            }
-            else {
-                bossFire.vy = 0;
-            }
-            bossFire.vx = -6;
-            bossShoot.push(bossFire);
+
+        var bossFire = new Sprites(0,0,52,28.25,boss.x, boss.y + 60);
+        var porcetagem = Math.floor(Math.random()*10);
+        
+        if (porcetagem <= 1) {
+            bossFire.vy = -2.5;
+            bossFire.vx = -7;
         }
+        else if (porcetagem <= 3 && porcetagem > 1) {
+            bossFire.vy = 2.5;
+            bossFire.vx = -7;
+        }
+        else if (porcetagem <= 5 && porcetagem > 3) {
+            bossFire.vy = -3.5;
+            bossFire.vx = -8;
+        }
+        else if (porcetagem <= 7 && porcetagem > 5) {
+            bossFire.vy = 3.5;
+            bossFire.vx = -8;
+        }
+        else if (porcetagem <= 9 && porcetagem > 7) {
+            bossFire.vy = 0;
+            bossFire.vx = -10;
+        }
+
+        bossShoot.push(bossFire);
     }
     for (let i = 0; i < bossShoot.length; i++) {
         bossShoot[i].x += bossShoot[i].vx;
@@ -253,7 +276,14 @@ function likeboss() {
             bossShoot[i].vy = 2.5;
         }
 
-        var teste = colisao(bossShoot[i], jogador);
+        if (bossShoot[i].x < -52) {
+            bossShoot.splice(i,1);
+            if (i > 0 && bossShoot.length > 0) {
+                i--;
+            }
+        }
+        else {
+            var teste = colisao(bossShoot[i], jogador);
             if (teste === true) {
                 vidaPlayer--;
                 bossShoot.splice(i,1);
@@ -272,14 +302,9 @@ function likeboss() {
                     MensagemGameOver.visible = true;  
                     gameState = GAMEOVER;  
                 }
-                if (bossShoot.length > 0) {
+                if (i > 0 && bossShoot.length > 0) {
                     i--;
                 }
-            }
-        if (bossShoot[i].x < -52) {
-            bossShoot.splice(i,1);
-            if (i > 0 && bossShoot.length > 0) {
-                i--;
             }
         }
     }
@@ -328,9 +353,7 @@ function update() {
         freefire();
     }
 
-    if(jogador.exploded === false) {
-        jogador.y = Math.min(cnv.height-jogador.height, Math.max(0,jogador.y + jogador.vy))
-    }
+    jogador.y = Math.min(cnv.height-jogador.height, Math.max(0,jogador.y + jogador.vy));
 
     for (let i = 0; i < tiros.length; i++) {
         tiros[i].x += tiros[i].vx;
@@ -340,10 +363,7 @@ function update() {
                 i--;
             }
         }
-        if(tiros.length < 1) {
-            break;
-        }
-        if (inimigos.length > 0) {
+        else {
             for (let j = 0; j < inimigos.length; j++) {
                 var teste = colisao(tiros[i], inimigos[j]);
                     if (teste === true) {
@@ -361,9 +381,8 @@ function update() {
                         }
                     }
             }
-        }
-        else if (inimigosAbatidos >= 100) {
-            var teste = colisao(tiros[i], boss);
+            if (inimigosAbatidos >= 100) {
+                var teste = colisao(tiros[i], boss);
                 if (teste === true) {
                     boss.bossLife -= 1;
                     if (boss.bossLife === 0) {
@@ -386,9 +405,7 @@ function update() {
                         i--;
                     }
                 }
-        }
-        if(tiros.length < 1) {
-            break;
+            }
         }
     }
 
@@ -410,7 +427,8 @@ function update() {
                 gameState = GAMEOVER;
             }
         }
-        var teste = colisao(jogador, inimigos[i]);
+        else {
+            var teste = colisao(jogador, inimigos[i]);
             if (teste === true) {
                 inimigos[i].vx = 0;
                 inimigos[i].exploded = true;
@@ -431,6 +449,7 @@ function update() {
                 MensagemGameOver.visible = true;  
                 gameState = GAMEOVER;  
             }
+        }
     }
 
     explodedAnimation();
