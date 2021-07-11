@@ -1,0 +1,14 @@
+@font-face {
+    font-family: Calibri-Download;
+    src: url('../calibri-font-family/calibri-regular.ttf') format("TrueType");
+}
+
+#teste {
+    margin: 0 auto;
+    width: 800px;
+    height: 450px;
+}
+
+canvas {
+    border: 1px solid black;
+}
