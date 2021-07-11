@@ -354,6 +354,14 @@ function update() {
     }
 
     jogador.y = Math.min(cnv.height-jogador.height, Math.max(0,jogador.y + jogador.vy));
+    
+    if (inimigosAbatidos < 100) {
+        spawnEnemy();
+    }
+    else if (inimigosAbatidos >= 100 && inimigos.length === 0){
+        likeboss();
+        eixoX();
+    }
 
     for (let i = 0; i < tiros.length; i++) {
         tiros[i].x += tiros[i].vx;
@@ -407,14 +415,6 @@ function update() {
                 }
             }
         }
-    }
-
-    if (inimigosAbatidos < 100) {
-        spawnEnemy();
-    }
-    else if (inimigosAbatidos >= 100 && inimigos.length === 0){
-        likeboss();
-        eixoX();
     }
 
     for (let i = 0; i < inimigos.length; i++) {
