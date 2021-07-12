@@ -305,33 +305,31 @@ function likeboss() {
 
         if (bossShoot[i].x < -52) {
             bossShoot.splice(i,1);
-            if (i > 0 && bossShoot.length > 0) {
-                i--;
-            }
+            i--;
         }
         else {
-            var teste = colisao(bossShoot[i], jogador);
-            if (teste === true) {
-                vidaPlayer--;
-                bossShoot[i].exploded = true;
-                bosshits.push(bossShoot[i]);
-                bossShoot.splice(i,1);
-                if (vidaPlayer === 0) {
-                    jogador.exploded = true;
-                    inimigosExplodidos.push(jogador);
-                
-                    var loopExploded = setInterval(() => {
-                        explodedAnimation(inimigosExplodidos);
-                    }, 16); 
+            if(bossShoot[i] !== undefined && jogador !== undefined) {
+                var teste = colisao(bossShoot[i], jogador);
+                if (teste === true) {
+                    vidaPlayer--;
+                    bossShoot[i].exploded = true;
+                    bosshits.push(bossShoot[i]);
+                    bossShoot.splice(i,1);
+                    if (vidaPlayer === 0) {
+                        jogador.exploded = true;
+                        inimigosExplodidos.push(jogador);
                     
-                    setTimeout(() => {
-                        clearInterval(loopExploded);
-                    }, 800);
+                        var loopExploded = setInterval(() => {
+                            explodedAnimation(inimigosExplodidos);
+                        }, 16); 
+                        
+                        setTimeout(() => {
+                            clearInterval(loopExploded);
+                        }, 800);
 
-                    MensagemGameOver.visible = true;  
-                    gameState = GAMEOVER;  
-                }
-                if (i > 0 && bossShoot.length > 0) {
+                        MensagemGameOver.visible = true;  
+                        gameState = GAMEOVER;  
+                    }
                     i--;
                 }
             }
@@ -349,6 +347,7 @@ function explodedAnimation(animationElement) {
 
             if(enemyExploded.animey === 3) {
                 animationElement.splice(i,1);
+                i--;
             }
         }
         if(enemyExploded.timeExploded > 15) {
@@ -396,13 +395,12 @@ function update() {
         tiros[i].x += tiros[i].vx;
         if (tiros[i].x > 800) {
             tiros.splice(i,1);
-            if (tiros.length < 1) {
-                break;
-            }
+            i--;
         }
         else {
             for (let j = 0; j < inimigos.length; j++) {
-                var teste = colisao(tiros[i], inimigos[j]);
+                if(tiros[i] !== undefined && inimigos[j] !== undefined) {
+                    var teste = colisao(tiros[i], inimigos[j]);
                     if (teste === true) {
                         inimigos[j].vx = 0;
                         inimigos[j].exploded = true;
@@ -411,38 +409,35 @@ function update() {
                         inimigosAbatidos++;
                         tiros.splice(i,1);
                         playSound(EXPLODEsound);
-                        if (i > 0) {
-                            i--;
-                        }
-                        if (j > 0) {
-                            j--;
-                        }
+                        i--;
+                        j--;
                     }
+                }
             }
             if (inimigosAbatidos >= 50) {
-                var teste = colisao(tiros[i], boss);
-                if (teste === true) {
-                    boss.bossLife -= 1;
-                    tiros[i].exploded = true;
-                    bosshits.push(tiros[i]);
-                    if (boss.bossLife === 0) {
-                        boss.youwin = true;
-                        inimigosExplodidos.push(boss);
-                        playSound(EXPLODEsound);
-                        
-                        var loopExploded = setInterval(() => {
-                            explodedAnimation(inimigosExplodidos);
-                        }, 16); 
-                        
-                        setTimeout(() => {
-                            clearInterval(loopExploded);
-                        }, 800);
-        
-                        MensagemWIN.visible = true;
-                        gameState = GAMEOVER;  
-                    }
-                    tiros.splice(i,1);
-                    if (i > 0) {
+                if(tiros[i] !== undefined && boss !== undefined) {
+                    var teste = colisao(tiros[i], boss);
+                    if (teste === true) {
+                        boss.bossLife -= 1;
+                        tiros[i].exploded = true;
+                        bosshits.push(tiros[i]);
+                        if (boss.bossLife === 0) {
+                            boss.youwin = true;
+                            inimigosExplodidos.push(boss);
+                            playSound(EXPLODEsound);
+                            
+                            var loopExploded = setInterval(() => {
+                                explodedAnimation(inimigosExplodidos);
+                            }, 16); 
+                            
+                            setTimeout(() => {
+                                clearInterval(loopExploded);
+                            }, 800);
+            
+                            MensagemWIN.visible = true;
+                            gameState = GAMEOVER;  
+                        }
+                        tiros.splice(i,1);
                         i--;
                     }
                 }
@@ -454,6 +449,7 @@ function update() {
         inimigos[i].x = inimigos[i].x + inimigos[i].vx;
         if (inimigos[i].x < -82) {
             inimigos.splice(i,1);
+            i--;
             vidaPlayer--;
             if (vidaPlayer === 0) {
                 MensagemGameOver.visible = true;
@@ -461,27 +457,30 @@ function update() {
             }
         }
         else {
-            var teste = colisao(jogador, inimigos[i]);
-            if (teste === true) {
-                inimigos[i].vx = 0;
-                inimigos[i].exploded = true;
-                jogador.exploded = true;
-                inimigosExplodidos.push(inimigos[i]);
-                inimigosExplodidos.push(jogador);
-                inimigos.splice(i,1);
-                vidaPlayer = 0;
-                playSound(EXPLODEsound);
-                
-                var loopExploded = setInterval(() => {
-                    explodedAnimation(inimigosExplodidos);
-                }, 16); 
-                
-                setTimeout(() => {
-                    clearInterval(loopExploded);
-                }, 800);
+            if(jogador !== undefined && inimigos[i] !== undefined) {
+                var teste = colisao(jogador, inimigos[i]);
+                if (teste === true) {
+                    inimigos[i].vx = 0;
+                    inimigos[i].exploded = true;
+                    jogador.exploded = true;
+                    inimigosExplodidos.push(inimigos[i]);
+                    inimigosExplodidos.push(jogador);
+                    inimigos.splice(i,1);
+                    i--;
+                    vidaPlayer = 0;
+                    playSound(EXPLODEsound);
+                    
+                    var loopExploded = setInterval(() => {
+                        explodedAnimation(inimigosExplodidos);
+                    }, 16); 
+                    
+                    setTimeout(() => {
+                        clearInterval(loopExploded);
+                    }, 800);
 
-                MensagemGameOver.visible = true;  
-                gameState = GAMEOVER;  
+                    MensagemGameOver.visible = true;  
+                    gameState = GAMEOVER;  
+                }
             }
         }
     }

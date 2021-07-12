@@ -12,7 +12,16 @@ canvas {
     border: 1px solid black;
 }
 
-p {
+#copyright {
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
 }
+
+span {
+    font-weight: bold;
+}
+
+a:link, a:visited {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+  }
