@@ -1,6 +1,4 @@
 # Projetos-Pessoais
-Alguns testes para treinar
-
 Códigos escritos para treinar e melhorar.
 
 Calculadora feita em javascript, html e css: https://rfps09.github.io/Projetos-Pessoais/Calculadora/index.html
