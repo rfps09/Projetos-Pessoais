@@ -44,7 +44,7 @@ Sprites.prototype.AnimeX =  function() {
 var MensagemLabel = function(texto,) {
     this.visible = false;
     this.content = texto;
-    this.font = "bold 30px Calibri-Download";
+    this.font = "bold 30px Arial, Helvetica, sans-serif";
     this.color = "red";
     this.textAlign = "center";
 }
