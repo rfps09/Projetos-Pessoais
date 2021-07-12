@@ -149,6 +149,9 @@ window.addEventListener('keydown', function(event){
             bosshits = [];
 
             jogador.exploded = false;
+            jogador.timeExploded = 0;
+            jogador.animex = 0;
+            jogador.animey = 0;
             jogador.x = 1;
             jogador.y= 197.15;
             boss.youwin = false;
