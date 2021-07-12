@@ -57,7 +57,7 @@ ImgBoss.src = "assets/planes/plane_3/plane_3_blue(-1).png";
 assetsToLoad.push(ImgBoss);
 
 var boss = new Sprites(0,0, 231.25, 113.75, cnv.width + 200, 225 - 57);
-boss.bossLife = 10;
+boss.bossLife = 100;
 
 var ImgBossShoot = new Image();
 
@@ -152,7 +152,7 @@ window.addEventListener('keydown', function(event){
             jogador.x = 1;
             jogador.y= 197.15;
             boss.youwin = false;
-            boss.bossLife = 10;
+            boss.bossLife = 100;
             boss.x = cnv.width + 200;
             boss.y = 225 - 57;
 
