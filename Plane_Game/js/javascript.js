@@ -1,3 +1,9 @@
+var then = Date.now();
+var fps = 60;
+var interval = 1000 / fps;
+var now;
+var delta;
+
 var cnv = document.querySelector("canvas");
 var ctx = cnv.getContext("2d");
 
@@ -118,12 +124,15 @@ window.addEventListener('keydown', function(event){
     var evento = event.keyCode;
     if ( (evento === 38 || evento === 87) && (evento !== 40 || evento !== 83)) {
         UP = true;
+        event.preventDefault();
     }
     if ( (evento === 40 || evento === 83) && (evento !== 38 || evento !== 87)) {
         DOWN = true;
+        event.preventDefault();
     }
     if (evento === 32) {
         SHOOT = true;
+        event.preventDefault();
     }
     if (evento === 13) {
         if (gameState === PAUSED) {
@@ -563,20 +572,25 @@ function render() {
 
 function loop() {
     requestAnimationFrame(loop);
-    switch(gameState){
-        case LOADING:
-            console.log('Loading...');
-            break;
-        case PAUSED:
-            render();
-            break;
-        case PLAYING:
-            update();
-            render();
-            break;
-        case GAMEOVER:
-            render();
-            break;
+    now = Date.now();
+    delta = now - then;
+    if (delta > interval) {
+        switch(gameState){
+            case LOADING:
+                console.log('Loading...');
+                break;
+            case PAUSED:
+                render();
+                break;
+            case PLAYING:
+                update();
+                render();
+                break;
+            case GAMEOVER:
+                render();
+                break;
+        }
+        then = now;
     }
 }
 
