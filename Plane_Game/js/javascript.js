@@ -613,20 +613,25 @@ function render() {
 
 function loop() {
     requestAnimationFrame(loop);
-    switch(gameState){
-        case LOADING:
-            console.log('Loading...');
-            break;
-        case PAUSED:
-            render();
-            break;
-        case PLAYING:
-            update();
-            render();
-            break;
-        case GAMEOVER:
-            render();
-            break;
+    now = Date.now();
+    delta = now - then;
+    if (delta > interval) {
+        switch(gameState){
+            case LOADING:
+                console.log('Loading...');
+                break;
+            case PAUSED:
+                render();
+                break;
+            case PLAYING:
+                update();
+                render();
+                break;
+            case GAMEOVER:
+                render();
+                break;
+        }
+        then = now - (delta%interval);
     }
 }
 
