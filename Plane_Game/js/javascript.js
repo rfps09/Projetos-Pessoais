@@ -144,7 +144,7 @@ function music(argumento) {
         musica.pause();
     }
     else if (argumento === "volumeMenos") {
-        if (volumeMusic > 0) {
+        if (volumeMusic >= 0.1) {
             volumeMusic = volumeMusic - 0.1;
             musica.volume = volumeMusic;
         }
