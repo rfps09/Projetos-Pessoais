@@ -615,7 +615,7 @@ function loop() {
     requestAnimationFrame(loop);
     now = Date.now();
     delta = now - then;
-    if (delta > interval) {
+    if (delta >= interval) {
         switch(gameState){
             case LOADING:
                 console.log('Loading...');
