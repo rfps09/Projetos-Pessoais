@@ -210,9 +210,9 @@ function mrcMemorie() {
     }
     else if (mrc != "" && alt == true) {
         mrc = "";
+        num = "";
         tamanho(num,"|");
         document.getElementById("resultado").style.animation = "piscando 1s infinite";
-        num = "";
         document.getElementById("resultado-teste").style.display = "none"
         mrcTeste()
         ce = true;
@@ -222,9 +222,9 @@ function mrcMemorie() {
 function mMais() {
     if (num != "") {
         mrc = num;
+        num = "";
         tamanho(num,"|");
         document.getElementById("resultado").style.animation = "piscando 1s infinite";
-        num = "";
         document.getElementById("resultado-teste").style.display = "none"
         alt = false;
         ce = true;
@@ -255,9 +255,9 @@ function mMenos() {
         else {
             mrc = resultado.toString();
         }
+        num = "";
         tamanho(num,"|");
         document.getElementById("resultado").style.animation = "piscando 1s infinite";
-        num = "";
         document.getElementById("resultado-teste").style.display = "none"
         alt = false;
         ce = true;
