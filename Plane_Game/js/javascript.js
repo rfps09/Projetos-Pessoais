@@ -631,7 +631,7 @@ function loop() {
                 render();
                 break;
         }
-        then = now - (delta%interval);
+        then = now;
     }
 }
 
