@@ -12,7 +12,8 @@ var LOADING = 0, PAUSED = 1, PLAYING = 2, GAMEOVER = 3;
 var FIREsound = 0, EXPLODEsound = 1;
 var gameState = LOADING;
 var carregamentoState = 0;
-var fogolivre = 20;
+var volumeMusic = 0.1;
+var fogolivre = 10;
 var timeSpawnEnemy = 0;
 var inimigosAbatidos = 0;
 var vidaPlayer = 3;
@@ -92,7 +93,7 @@ var MensagemWIN = new MensagemLabel("YOU WIN");
 MensagemWIN.visible = false;
 mensagens.push(MensagemWIN);
 
-document.getElementById('musica').volume = 0.1;
+document.getElementById('musica').volume = volumeMusic;
 
 function carregando() {
     carregamentoState++;
@@ -139,8 +140,20 @@ function music(argumento) {
     else if (argumento === "play") {
         musica.play();
     }
-    else {
+    else if (argumento === "pause") {
         musica.pause();
+    }
+    else if (argumento === "volumeMenos") {
+        if (volumeMusic > 0) {
+            volumeMusic = volumeMusic - 0.1;
+            musica.volume = volumeMusic;
+        }
+    }
+    else if (argumento === "volumeMais") {
+        if (volumeMusic < 1) {
+            volumeMusic = volumeMusic + 0.1;
+            musica.volume = volumeMusic;
+        }
     }
 }
 
@@ -169,7 +182,7 @@ window.addEventListener('keydown', function(event){
             gameState = PLAYING;
         }
         else if (gameState === GAMEOVER) {
-            fogolivre = 20;
+            fogolivre = 10;
             timeSpawnEnemy = 0;
             inimigosAbatidos = 0;
             vidaPlayer = 3;
@@ -226,7 +239,7 @@ window.addEventListener('keyup', function(event){
     }
     if (evento === 32) {
         SHOOT = false;
-        fogolivre = 20;
+        fogolivre = 10;
     }
 });
 
@@ -270,7 +283,7 @@ function eixoX() {
 }
 
 function freefire() {
-    if(fogolivre > 20) {
+    if(fogolivre > 10) {
         fogolivre = 0;
         var tiro = new Sprites( 0, 0, 16, 7.1, jogador.x + 99.3, jogador.CenterY()+5 );
         tiro.vx = 8;
