@@ -11,24 +11,42 @@
     <div id="teste">
         <canvas id="Tela-Jogo" width="800" height="450"></canvas>
         
-        <p id="copyright">
-            Song: Warriyo - Mortals (feat. Laura Brehm) [NCS Release] <br>
-            Music provided by NoCopyrightSounds <br>
-            Free Download/Stream: <a href="http://ncs.io/mortals" target="_blank">http://ncs.io/mortals</a><br>
-            Watch: <a href="http://youtu.be/yJg-Y5byMMw" target="_blank">http://youtu.be/yJg-Y5byMMw</a> <br>
-        </p>
         <p>
             <span>Controles da nave:</span> W,S ou ↑,↓ para movimentar a nave. A movimentação usando as teclas A,D ou ← ou →, só é habilitada quando o chefão aparecer. <br>
             <br><span>Atirar:</span> Barra de espaço. <br>
             <br><span>Controles Gerais do jogo:</span> ENTER para iniciar o jogo, pausar e reiniciar após GameOver. <br>
         </p>
+
+        <p class="copyright">
+            Opções de Músicas: <br>
+            <button onclick="music('cartoon')">Cartoon</button>
+            <button onclick="music('instrumental')">Cartoon Instrumental</button>
+            <button onclick="music('mortals')">Mortals</button><br>
+            Controles: <br>
+            <button onclick="music('play')">Retomar Música</button>
+            <button onclick="music('pause')">Pausar Música</button>
+        </p>
+
+        <p class="copyright">
+            Song: Warriyo - Mortals (feat. Laura Brehm) [NCS Release] <br>
+            Music provided by NoCopyrightSounds <br>
+            Free Download/Stream: <a href="http://ncs.io/mortals" target="_blank">http://ncs.io/mortals</a><br>
+            Watch: <a href="http://youtu.be/yJg-Y5byMMw" target="_blank">http://youtu.be/yJg-Y5byMMw</a> <br>
+        </p>
+
+        <p class="copyright">
+            Song: Cartoon - Why We Lose (feat. Coleman Trapp) [NCS Release] <br>
+            Music provided by NoCopyrightSounds <br>
+            Free Download/Stream: http://ncs.io/whywelose <br>
+            Watch: http://youtu.be/zyXmsVwZqX4 <br>
+        </p>
     </div>
-    <audio id="Mortals" src="sound/Warriyo - Mortals (feat. Laura Brehm) [NCS Release].mp3" type="audio/mpeg" loop autoplay></audio>
+    <audio id="musica" src="sound/Warriyo - Mortals (feat. Laura Brehm) [NCS Release].mp3" loop autoplay></audio>
     <script src="js/objects.js"></script>
     <script src="js/collision.js"></script>
     <script src="js/javascript.js"></script>
     <!-- assets retirados de: https://gamedeveloperstudio.itch.io/plane-game-pack -->
-    <!-- fonte retirada de: https://www.dafontfree.io/calibri-font/ -->
+    <!-- fonte retirada de: https://www.dafont.com/pt/code2.font -->
     <!-- Corazon retirado da internet por um amigo, não sei a fonte. -->
     <!--    
         Song: Warriyo - Mortals (feat. Laura Brehm) [NCS Release]

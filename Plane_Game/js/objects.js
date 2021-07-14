@@ -23,14 +23,6 @@ Sprites.prototype.CenterY = function() {
     return this.y + (this.height/2);
 }
 
-Sprites.prototype.halfwidth = function() {
-    return this.width/2;
-}
-
-Sprites.prototype.halfheight = function() {
-    return this.height/2;
-}
-
 Sprites.prototype.AnimeY = function() {
     this.animey = this.timeExploded/5 === 3 ? this.animey+1 : this.animey;
     return this.animey;
@@ -44,7 +36,7 @@ Sprites.prototype.AnimeX =  function() {
 var MensagemLabel = function(texto,) {
     this.visible = false;
     this.content = texto;
-    this.font = "bold 30px Arial, Helvetica, sans-serif";
+    this.font = "bold 36px pixelada,Arial, Helvetica, sans-serif";
     this.color = "red";
     this.textAlign = "center";
 }

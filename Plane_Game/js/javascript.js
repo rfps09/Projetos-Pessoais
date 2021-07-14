@@ -19,6 +19,7 @@ var vidaPlayer = 3;
 var limiteTimeSpawnEnemy = 60;
 var bossShootTime = 0
 var speedEnemy = 0;
+var piscando = 0;
 
 var tiros = [];
 var inimigos = [];
@@ -91,7 +92,7 @@ var MensagemWIN = new MensagemLabel("YOU WIN");
 MensagemWIN.visible = false;
 mensagens.push(MensagemWIN);
 
-document.getElementById('Mortals').volume = 0.2;
+document.getElementById('musica').volume = 0.1;
 
 function carregando() {
     carregamentoState++;
@@ -116,8 +117,31 @@ function playSound(whichsound) {
         som.src = "sound/exploded.mp4"
     }
     som.addEventListener("canplaythrough", event => {
+        som.volume = 0.4;
         som.play();
     });
+}
+
+function music(argumento) {
+    var musica = document.getElementById('musica');
+    if(argumento === "cartoon") {
+        musica.src = "sound/Cartoon - Why We Lose (feat. Coleman Trapp) [NCS Release].mp3";
+        musica.play();
+    }
+    else if (argumento === "instrumental") {
+        musica.src = "sound/Cartoon - Why We Lose (feat. Coleman Trapp) [NCS Release]-instrumental.mp3";
+        musica.play();
+    }
+    else if (argumento === "mortals") {
+        musica.src = "sound/Warriyo - Mortals (feat. Laura Brehm) [NCS Release].mp3";
+        musica.play();
+    }
+    else if (argumento === "play") {
+        musica.play();
+    }
+    else {
+        musica.pause();
+    }
 }
 
 window.addEventListener('keydown', function(event){
@@ -135,11 +159,13 @@ window.addEventListener('keydown', function(event){
         event.preventDefault();
     }
     if (evento === 13) {
+        event.preventDefault();
         if (gameState === PAUSED) {
             MensagemStart.visible = false;
             MensagemPaused.visible = false;
             MensagemGameOver.visible = false;
             MensagemWIN.visible = false;
+            piscando = 30;
             gameState = PLAYING;
         }
         else if (gameState === GAMEOVER) {
@@ -150,6 +176,7 @@ window.addEventListener('keydown', function(event){
             limiteTimeSpawnEnemy = 60;
             bossShootTime = 0;
             speedEnemy = 0;
+            piscando = 30;
 
             tiros = [];
             inimigos = [];
@@ -165,6 +192,9 @@ window.addEventListener('keydown', function(event){
             jogador.y= 197.15;
             boss.youwin = false;
             boss.bossLife = 100;
+            boss.timeExploded = 0;
+            boss.animex = 0;
+            boss.animey = 0;
             boss.x = cnv.width + 200;
             boss.y = 225 - 57;
 
@@ -180,6 +210,7 @@ window.addEventListener('keydown', function(event){
             MensagemPaused.visible = true;
             MensagemGameOver.visible = false;
             MensagemWIN.visible = false;
+            piscando = 30;
             gameState = PAUSED;
         }
     }
@@ -204,10 +235,12 @@ function eixoX() {
         var evento = event.keyCode;
         if ( (evento === 68 || evento === 39) && (evento !== 65 || evento !== 37) ) {
             RIGHT = true;
+            event.preventDefault();
         }
 
         if ( (evento === 65 || evento === 37) && (evento !== 68 || evento !== 39) ) {
             LEFT = true;
+            event.preventDefault();
         }
     });
 
@@ -337,7 +370,7 @@ function likeboss() {
                         
                         setTimeout(() => {
                             clearInterval(loopExploded);
-                        }, 800);
+                        }, 1000);
 
                         MensagemGameOver.visible = true;  
                         gameState = GAMEOVER;  
@@ -444,7 +477,7 @@ function update() {
                             
                             setTimeout(() => {
                                 clearInterval(loopExploded);
-                            }, 800);
+                            }, 1000);
             
                             MensagemWIN.visible = true;
                             gameState = GAMEOVER;  
@@ -504,10 +537,11 @@ function update() {
     timeSpawnEnemy++;
     bossShootTime++;
     limiteTimeSpawnEnemy -= 0.01;
-    speedEnemy+= 0.001;
+    speedEnemy+= 0.0015;
 }
 
 function render() {
+    piscando++;
     ctx.clearRect(0,0,cnv.width, cnv.height);
     ctx.drawImage(ImgFundo, fundo.sourceX, fundo.sourceY, 2826, 1536, fundo.x, fundo.y, fundo.width, fundo.height);
     if(jogador.exploded === false) {
@@ -551,8 +585,8 @@ function render() {
         ctx.drawImage(ImgExploded, 595.33 * hits.animex, 512 * hits.animey, 595.33, 512, hits.x, hits.y, 29.75, 25.6);
     }
 
-    ctx.font = "bold 18px Arial, Helvetica, sans-serif";
-    ctx.fillStyle = "blue";
+    ctx.font = "bold 22px pixelada,Arial, Helvetica, sans-serif";
+    ctx.fillStyle = "black";
     ctx.textAlign = "right";
     ctx.fillText("Naves abatidas: " + inimigosAbatidos, cnv.width-15, 25);
     
@@ -561,7 +595,14 @@ function render() {
     }
 
     for (let i = 0; i < mensagens.length; i++) {
-        if(mensagens[i].visible === true) {
+        if(mensagens[i].visible === true && piscando > 30 && mensagens[i].content !== "GAME OVER") {
+            if(piscando > 60){piscando = 0;};
+            ctx.font = mensagens[i].font;
+            ctx.fillStyle = mensagens[i].color;
+            ctx.textAlign = mensagens[i].textAlign;
+            ctx.fillText(mensagens[i].content, cnv.width/2, cnv.height/2);
+        }
+        else if (mensagens[i].visible === true && (mensagens[i].content === "GAME OVER" || mensagens[i].content === "YOU WIN")) {
             ctx.font = mensagens[i].font;
             ctx.fillStyle = mensagens[i].color;
             ctx.textAlign = mensagens[i].textAlign;
@@ -590,7 +631,7 @@ function loop() {
                 render();
                 break;
         }
-        then = now;
+        then = now - (delta%interval);
     }
 }
 
