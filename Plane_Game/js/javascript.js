@@ -150,7 +150,7 @@ function music(argumento) {
         }
     }
     else if (argumento === "volumeMais") {
-        if (volumeMusic < 1) {
+        if (volumeMusic <= 0.9) {
             volumeMusic = volumeMusic + 0.1;
             musica.volume = volumeMusic;
         }
