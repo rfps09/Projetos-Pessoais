@@ -1,6 +1,6 @@
 var then = Date.now();
 var fps = 60;
-var interval = 1000 / fps;
+var interval = Math.floor(1000 / fps);
 var now;
 var delta;
 
@@ -628,7 +628,7 @@ function loop() {
     requestAnimationFrame(loop);
     now = Date.now();
     delta = now - then;
-    if (delta > interval) {
+    if (delta >= interval) {
         then = now - (delta%interval);
         
         switch(gameState){
