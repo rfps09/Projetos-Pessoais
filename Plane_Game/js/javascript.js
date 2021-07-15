@@ -629,6 +629,8 @@ function loop() {
     now = Date.now();
     delta = now - then;
     if (delta > interval) {
+        then = now - (delta%interval);
+        
         switch(gameState){
             case LOADING:
                 console.log('Loading...');
@@ -644,7 +646,6 @@ function loop() {
                 render();
                 break;
         }
-        then = now - (delta%interval);
     }
 }
 
