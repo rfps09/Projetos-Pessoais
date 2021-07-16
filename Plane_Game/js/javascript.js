@@ -1,4 +1,4 @@
-var then = Date.now();
+var then = window.performance.now();
 var fps = 60;
 var interval = Math.floor(1000 / fps);
 var now;
@@ -626,7 +626,7 @@ function render() {
 
 function loop() {
     requestAnimationFrame(loop);
-    now = Date.now();
+    now = window.performance.now();
     delta = now - then;
     if (delta >= interval) {
         then = now - (delta%interval);
