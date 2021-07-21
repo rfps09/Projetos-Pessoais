@@ -355,10 +355,12 @@ function likeboss() {
         bossShoot[i].x += bossShoot[i].vx;
         bossShoot[i].y += bossShoot[i].vy;
         if (bossShoot[i].y > cnv.height - 28.25) {
-            bossShoot[i].vy = -2.5;
+            if(bossShoot[i].vy === 2.5){bossShoot[i].vy = -2.5;};
+            if(bossShoot[i].vy === 3.5){bossShoot[i].vy = -3.5;};
         }
         else if (bossShoot[i].y <= 0) {
-            bossShoot[i].vy = 2.5;
+            if(bossShoot[i].vy === -2.5){bossShoot[i].vy = 2.5;};
+            if(bossShoot[i].vy === -3.5){bossShoot[i].vy = 3.5;};
         }
 
         if (bossShoot[i].x < -52) {
