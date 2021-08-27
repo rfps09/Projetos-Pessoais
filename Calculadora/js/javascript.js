@@ -76,6 +76,22 @@ function funcaoOP(y) {
         }
         alt = false;
     }
+    else if (op != "" && num == "") {
+        op = y;
+        if (op == "%") {
+            resultado();
+        }
+        else if (op == "raiz") {
+            resultado();
+        }
+        else {
+            tamanho(aux, aux+op);
+            num = "";
+            document.getElementById("resultado-teste").style.display = "none"
+            ce = true;
+        }
+        alt = false;
+    }
     else if (op != "" && num != "") {
         resultado(y);
     }
@@ -143,22 +159,7 @@ function resultado(o) {
             resultado = auxiliar / numero;    
         }
         else if (op == '^') {
-            if (numero > 0) { 
-                resultado = auxiliar;
-                for (let i = 1; i < numero; i++) {
-                    resultado *= auxiliar;
-                }
-            }
-            else if (numero < 0) {
-                resultado = auxiliar;
-                for (let i = 1; i < numero * -1; i++) {
-                    resultado *= auxiliar;
-                }
-                resultado = 1 / resultado;
-            }
-            else {
-                resultado = 1;
-            }
+            resultado = Math.pow(aux,num);
         }
         else if (op == '%') {
             resultado = parseFloat(num) / 100;
