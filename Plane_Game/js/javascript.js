@@ -218,7 +218,7 @@ window.addEventListener('keydown', function(event){
 
             gameState = PLAYING;
         }
-        else {
+        else if (gameState === PLAYING) {
             MensagemStart.visible = false;
             MensagemPaused.visible = true;
             MensagemGameOver.visible = false;
