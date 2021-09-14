@@ -31,36 +31,36 @@ var bossShoot = [];
 var bosshits = [];
 
 var ImgFundo = new Image();
-ImgFundo.addEventListener('load',carregando());
+ImgFundo.addEventListener("load",carregando());
 ImgFundo.src = "assets/sky_background/example/sky_background_green_hills.png";
 assetsToLoad.push(ImgFundo);
 
 var fundo = new Sprites(0, 0, 800, 450, 0, 0);
 
 var ImgJogador = new Image();
-ImgJogador.addEventListener('load',carregando());
+ImgJogador.addEventListener("load",carregando());
 ImgJogador.src = "assets/planes/plane_2/plane_2_green.png";
 assetsToLoad.push(ImgJogador);
 
 var jogador = new Sprites(0,0,101.3,55.7,1,197.15);
 
 var ImgEnemy = new Image();
-ImgEnemy.addEventListener('load',carregando());
+ImgEnemy.addEventListener("load",carregando());
 ImgEnemy.src = "assets/planes/plane_1/plane_1_red(-1).png";
 assetsToLoad.push(ImgEnemy);
 
 var ImgFire = new Image();
-ImgFire.addEventListener('load',carregando());
+ImgFire.addEventListener("load",carregando());
 ImgFire.src = "assets/planes/torpedo/fire_ball_1.png";
 assetsToLoad.push(ImgFire);
 
 var ImgExploded = new Image();
-ImgExploded.addEventListener('load',carregando());
+ImgExploded.addEventListener("load",carregando());
 ImgExploded.src = "assets/explosion_effect/spritesheet/spritesheet.png";
 assetsToLoad.push(ImgExploded);
 
 var ImgBoss = new Image();
-ImgBoss.addEventListener('load', carregando());
+ImgBoss.addEventListener("load", carregando());
 ImgBoss.src = "assets/planes/plane_3/plane_3_blue(-1).png";
 assetsToLoad.push(ImgBoss);
 
@@ -74,7 +74,7 @@ assetsToLoad.push(ImgBossShoot);
 
 var ImgVida = new Image();
 ImgVida.src = "assets/corazon.png";
-ImgVida.addEventListener('load', carregando());
+ImgVida.addEventListener("load", carregando());
 assetsToLoad.push(ImgVida);
 
 var MensagemStart = new MensagemLabel("PRESS ENTER");
@@ -106,6 +106,7 @@ function carregando() {
         ImgBoss.removeEventListener('load',carregando());
         ImgVida.removeEventListener('load', carregando());
         gameState = PAUSED;
+        console.log("Todos os recursos terminaram o carregamento!");
     }
 }
 
