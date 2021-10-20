@@ -1,0 +1,32 @@
+body {
+    background-color: slateblue;
+}
+
+header {
+    text-align: center;
+    color: snow;
+    font-size: 32px;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    color: snow;
+    font-size: 16px;
+    min-height: 500px;
+}
+
+button {
+    display: block;
+    margin: 20px auto;
+}
+
+#main {
+    text-align: center;
+}
+#ans {
+    color: snow;
+    display: none;
+    text-align: center;
+}
